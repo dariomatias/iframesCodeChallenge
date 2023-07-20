@@ -1,17 +1,18 @@
 /**
  * test with page objects
  */
-import LoginPage from '../pageobjects/login.page.js'
-import SecurePage from '../pageobjects/secure.page.js'
+import MainIframePage from "../pageobjects/mainIframe.page";
+import InternalIframePage from "../pageobjects/internalIframe.page";
+import AboutUsPage from "../pageobjects/aboutUs.page";
 
-describe('My Login application', () => {
-    it('should login with valid credentials', async () => {
-        await LoginPage.open()
+describe('Iframes code challenge', () => {
+    it('challenge', async () => {
+        await MainIframePage.open()
+        await MainIframePage.accessInternalIFrame()
+        await InternalIframePage.accessAboutPage()
 
-        await LoginPage.login('tomsmith', 'SuperSecretPassword!')
-        await expect(SecurePage.flashAlert).toBeExisting()
-        await expect(SecurePage.flashAlert).toHaveTextContaining(
-            'You logged into a secure area!')
+        //Account creation is not working on the site at the moment.
+        AboutUsPage.showDetails()
     })
 })
 
